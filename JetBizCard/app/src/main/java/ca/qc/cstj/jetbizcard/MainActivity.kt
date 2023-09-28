@@ -20,9 +20,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -104,10 +106,10 @@ private fun CardInfoSection(modifier: Modifier = Modifier) {
             Text(text= "Android Compose Programmer", modifier = Modifier.padding(3.dp))
             Text(text= "@yellowkiwi", modifier = Modifier.padding(3.dp), style = MaterialTheme.typography.labelSmall)
 
-            Button(onClick = {
+            ElevatedButton(onClick = {
                 //Toast.makeText(context, "Bonjour d'un bouton Compose", Toast.LENGTH_LONG).show()
                 portfolioClickedState.value = !portfolioClickedState.value
-            }) {
+            },  colors =  ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)) {
                 Text(text = stringResource(R.string.portfolio), style = MaterialTheme.typography.labelMedium)
             }
             if(portfolioClickedState.value) {
