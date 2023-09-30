@@ -6,12 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,12 +24,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,6 +44,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import ca.qc.cstj.jetbizcard.models.Profile
 import ca.qc.cstj.jetbizcard.ui.theme.JetBizCardTheme
 import ca.qc.cstj.jetbizcard.ui.theme.OffWhite
 
@@ -58,7 +59,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateBizCard()
+                    MainScreen()
                 }
             }
         }
@@ -66,7 +67,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun CreateBizCard() {
+fun MainScreen(mainViewModel: MainViewModel = viewModel()) {
+    val mainUIState by mainViewModel.mainUIState.collectAsState()
+    when(val state = mainUIState) {
+        is MainUIState.Error -> TODO()
+        MainUIState.Loading -> TODO()
+        is MainUIState.Success -> {
+            ProfileCard(state.profile)
+        }
+    }
+
+}
+
+@Composable
+private fun ProfileCard(profile: Profile) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -90,13 +104,13 @@ private fun CreateBizCard() {
                         color = MaterialTheme.colorScheme.primary,
                         thickness = 0.5.dp
                 )
-                CardInfoSection()
+                CardInfoSection(profile)
             }
         }
     }
 }
 @Composable
-private fun CardInfoSection(modifier: Modifier = Modifier) {
+private fun CardInfoSection(profile: Profile, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val portfolioClickedState = remember {
         mutableStateOf(false)
@@ -104,7 +118,7 @@ private fun CardInfoSection(modifier: Modifier = Modifier) {
     Column(modifier =
         Modifier.padding(5.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Yannick Charron",
+            Text(text = profile.name,
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary)
             Text(text= "Android Compose Programmer", modifier = Modifier.padding(3.dp))
@@ -193,6 +207,6 @@ private fun ProfilePicture(modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     JetBizCardTheme {
-        CreateBizCard()
+        MainScreen()
     }
 }
