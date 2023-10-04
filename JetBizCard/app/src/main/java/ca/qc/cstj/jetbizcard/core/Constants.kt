@@ -1,11 +1,12 @@
 package ca.qc.cstj.jetbizcard.core
 
 object Constants {
-    private const val BASE_API = "https://api.andromia.science"
+    private const val BASE_API = "http://10.0.2.2:3003"
+
+    const val PROFILE_URL = "$BASE_API/profile"
 
     object RefreshDelay {
-        const val REFRESH_ELEMENTS_DELAY = 65000L
-        const val MONSTER_REFRESH_DELAY = 90000L
+        const val PROFILE_REFRESH_DELAY = 65000L
     }
 
 }

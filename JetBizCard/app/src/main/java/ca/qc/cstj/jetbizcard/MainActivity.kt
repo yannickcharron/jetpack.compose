@@ -46,6 +46,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ca.qc.cstj.jetbizcard.models.Profile
+import ca.qc.cstj.jetbizcard.models.Project
+import ca.qc.cstj.jetbizcard.ui.composables.LoadingSpinner
 import ca.qc.cstj.jetbizcard.ui.theme.JetBizCardTheme
 import ca.qc.cstj.jetbizcard.ui.theme.OffWhite
 
@@ -70,8 +72,16 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(mainViewModel: MainViewModel = viewModel()) {
     val mainUIState by mainViewModel.mainUIState.collectAsState()
     when(val state = mainUIState) {
-        is MainUIState.Error -> TODO()
-        MainUIState.Loading -> TODO()
+        is MainUIState.Error -> { }
+        MainUIState.Loading -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                LoadingSpinner()
+            }
+        }
         is MainUIState.Success -> {
             ProfileCard(state.profile)
         }
@@ -121,8 +131,8 @@ private fun CardInfoSection(profile: Profile, modifier: Modifier = Modifier) {
             Text(text = profile.name,
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary)
-            Text(text= "Android Compose Programmer", modifier = Modifier.padding(3.dp))
-            Text(text= "@yellowkiwi", modifier = Modifier.padding(3.dp), style = MaterialTheme.typography.labelSmall)
+            Text(text = profile.title, modifier = Modifier.padding(3.dp))
+            Text(text= profile.alias, modifier = Modifier.padding(3.dp), style = MaterialTheme.typography.labelSmall)
 
             Button(onClick = {
                 //Toast.makeText(context, "Bonjour d'un bouton Compose", Toast.LENGTH_LONG).show()
@@ -131,13 +141,13 @@ private fun CardInfoSection(profile: Profile, modifier: Modifier = Modifier) {
                 Text(text = stringResource(R.string.portfolio), style = MaterialTheme.typography.labelMedium)
             }
             if(portfolioClickedState.value) {
-                PorfoliosList()
+                PorfoliosList(profile.projects)
             } 
     }
 }
 
 @Composable
-private fun PorfoliosList() {
+private fun PorfoliosList(projects: List<Project>) {
     Box(modifier = Modifier
         .fillMaxSize()
         .padding(5.dp)) {
@@ -147,13 +157,13 @@ private fun PorfoliosList() {
                 shape = RoundedCornerShape(corner = CornerSize(6.dp)),
                 border = BorderStroke(width = 2.dp, color = Color.LightGray)
             ) {
-                Portfolio(projects = listOf("Project 1", "Project 2", "Project 3", "Project 4", "Project 5"))
+                Portfolio(projects = projects)
             }
     }
 }
 
 @Composable
-fun Portfolio(projects: List<String>) {
+fun Portfolio(projects: List<Project>) {
     LazyColumn {
         items(projects) { project ->
             PortfolioCardItem(project)
@@ -161,7 +171,7 @@ fun Portfolio(projects: List<String>) {
     }
 }
 @Composable
-private fun PortfolioCardItem(projectTitle : String) {
+private fun PortfolioCardItem(project : Project) {
     Card(modifier = Modifier
         .padding(8.dp),
         shape = RectangleShape,
@@ -175,7 +185,7 @@ private fun PortfolioCardItem(projectTitle : String) {
                 .padding(8.dp)
                 .align(alignment = Alignment.CenterVertically),
             ) {
-                Text(text =  projectTitle, fontWeight = FontWeight.Bold)
+                Text(text =  project.title, fontWeight = FontWeight.Bold)
                 Text(text = "Description du projet", style = MaterialTheme.typography.labelSmall)
             }
         }
@@ -207,6 +217,7 @@ private fun ProfilePicture(modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     JetBizCardTheme {
+        //https://stackoverflow.com/questions/64841794/viewmodels-creation-is-not-supported-in-preview
         MainScreen()
     }
 }
