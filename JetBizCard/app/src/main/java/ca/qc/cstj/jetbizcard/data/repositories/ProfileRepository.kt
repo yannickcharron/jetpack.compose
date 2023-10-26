@@ -17,7 +17,7 @@ class ProfileRepository {
     fun retrieveOne(): Flow<ApiResult<Profile>> {
         return flow {
             while(true) {
-                delay(10000L)
+                //delay(10000L)
                 try{
                     emit(ApiResult.Loading)
                     val profile = profileDataSource.retrieveOne()

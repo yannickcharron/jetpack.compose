@@ -1,6 +1,7 @@
 package ca.qc.cstj.jetbizcard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -72,7 +73,9 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(mainViewModel: MainViewModel = viewModel()) {
     val mainUIState by mainViewModel.mainUIState.collectAsState()
     when(val state = mainUIState) {
-        is MainUIState.Error -> { }
+        is MainUIState.Error -> {
+            Log.d("Error", state.exception.toString())
+        }
         MainUIState.Loading -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
