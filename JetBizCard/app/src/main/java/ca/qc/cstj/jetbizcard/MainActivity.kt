@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(mainViewModel: MainViewModel = viewModel()) {
     val mainUIState by mainViewModel.mainUIState.collectAsState()
+
     when(val state = mainUIState) {
         is MainUIState.Error -> {
             Log.d("Error", state.exception.toString())
@@ -125,9 +126,8 @@ private fun ProfileCard(profile: Profile) {
 @Composable
 private fun CardInfoSection(profile: Profile, modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val portfolioClickedState = remember {
-        mutableStateOf(false)
-    }
+    val portfolioClickedState = remember { mutableStateOf(false) }
+
     Column(modifier =
         Modifier.padding(5.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
