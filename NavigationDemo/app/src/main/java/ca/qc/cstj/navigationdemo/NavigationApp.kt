@@ -30,26 +30,24 @@ fun NavigationApp(
         startDestination = Screen.Login.route
     ) {
         composable(Screen.Login.route, content = { LoginScreen(navController) })
-        composable(Screen.Home.route) {
-            navigation(route = Screen.Home.title, startDestination = Screen.Profile.route) {
-                composable(Screen.Profile.route) {
-                    BottomNavScreen(navController) {
-                        ProfileScreen()
-                    }
+        navigation(route = Screen.Home.route, startDestination = Screen.Profile.route) {
+            composable(Screen.Profile.route) {
+                BottomNavScreen(navController) {
+                    ProfileScreen(navController)
                 }
-                composable(Screen.Analytics.route)  {
-                    BottomNavScreen(navController) {
-                        ProfileScreen()
-                    }
+            }
+            composable(Screen.Analytics.route)  { navBackStackEntry ->
+                val id = navBackStackEntry.arguments?.getString("id")!!
+                BottomNavScreen(navController) {
+                    AnalyticsScreen(id.toInt())
                 }
-                composable(Screen.List.route)  {
-                    BottomNavScreen(navController) {
-                        ProfileScreen()
-                    }
+            }
+            composable(Screen.List.route)  {
+                BottomNavScreen(navController) {
+                    ListScreen()
                 }
             }
         }
-
     }
 }
 
@@ -70,7 +68,7 @@ sealed class Screen(val title: String, val route: String) {
     object Login : Screen("Login", route = "login")
     object Home : Screen("Home", route = "home")
     object List : Screen("List", route = "list")
-    object Analytics: Screen("Analytics", route = "analytics" )
+    object Analytics: Screen("Analytics", route = "analytics/{id}" )
     object Profile: Screen("Profile", route = "profile")
 
 }
