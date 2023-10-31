@@ -37,6 +37,7 @@ fun NavigationApp(
                 }
             }
             composable(Screen.Analytics.route)  { navBackStackEntry ->
+                //https://medium.com/@daniel.atitienei/navigate-with-arguments-in-jetpack-compose-90846d70bb7f/
                 val id = navBackStackEntry.arguments?.getString("id")!!
                 BottomNavScreen(navController) {
                     AnalyticsScreen(id.toInt())
