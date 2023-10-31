@@ -1,4 +1,4 @@
-package ca.qc.cstj.navigationdemo.ui.composables
+package ca.qc.cstj.navigationdemo.ui.components
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
@@ -17,10 +17,10 @@ import ca.qc.cstj.navigationdemo.R
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
-        BottomNavItem.Home,
+        //BottomNavItem.Home,
+        BottomNavItem.Profile,
         BottomNavItem.List,
-        BottomNavItem.Analytics,
-        BottomNavItem.Profile
+        BottomNavItem.Analytics
     )
 
     NavigationBar {
@@ -43,9 +43,9 @@ fun RowScope.AddItem(screen: BottomNavItem, navController: NavController) {
 }
 
 sealed class BottomNavItem(var title: String, var icon: Int) {
-    object Home: BottomNavItem("Home", R.drawable.baseline_home_24)
+    object Profile: BottomNavItem("Profile", R.drawable.baseline_person_24)
+    //object Home: BottomNavItem("Home", R.drawable.baseline_home_24)
     object List: BottomNavItem("List", R.drawable.baseline_list_24)
     object Analytics: BottomNavItem("Analytics", R.drawable.baseline_analytics_24)
-    object Profile: BottomNavItem("Profile", R.drawable.baseline_person_24)
 
 }
