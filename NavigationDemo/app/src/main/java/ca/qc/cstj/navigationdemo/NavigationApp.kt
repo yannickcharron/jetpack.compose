@@ -38,9 +38,9 @@ fun NavigationApp(
             }
             composable(Screen.Analytics.route)  { navBackStackEntry ->
                 //https://medium.com/@daniel.atitienei/navigate-with-arguments-in-jetpack-compose-90846d70bb7f/
-                val id = navBackStackEntry.arguments?.getString("id")!!
+                val href = navBackStackEntry.arguments?.getString("href")!!
                 BottomNavScreen(navController) {
-                    AnalyticsScreen(id.toInt())
+                    AnalyticsScreen(href)
                 }
             }
             composable(Screen.List.route)  {
@@ -69,7 +69,7 @@ sealed class Screen(val title: String, val route: String) {
     object Login : Screen("Login", route = "login")
     object Home : Screen("Home", route = "home")
     object List : Screen("List", route = "list")
-    object Analytics: Screen("Analytics", route = "analytics/{id}" )
+    object Analytics: Screen("Analytics", route = "analytics/{href}" )
     object Profile: Screen("Profile", route = "profile")
 
 }

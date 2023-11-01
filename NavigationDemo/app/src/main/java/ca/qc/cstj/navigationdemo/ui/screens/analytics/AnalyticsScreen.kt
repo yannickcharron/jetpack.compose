@@ -9,9 +9,9 @@ import androidx.compose.ui.unit.dp
 import ca.qc.cstj.navigationdemo.ui.components.BottomNavItem
 
 @Composable
-fun AnalyticsScreen(id: Int) {
+fun AnalyticsScreen(href: String) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text(BottomNavItem.Analytics.title)
-        Text(id.toString())
+        Text(href)
     }
 }

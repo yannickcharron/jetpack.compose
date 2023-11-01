@@ -10,13 +10,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ca.qc.cstj.navigationdemo.Screen
 import ca.qc.cstj.navigationdemo.ui.components.BottomNavItem
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun ProfileScreen(navController: NavHostController) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text(BottomNavItem.Profile.title)
         Button(onClick = {
-            navController.navigate(Screen.Analytics.route.replace("{id}", "1243154"))
+            val url = "https://api.andromia.science/allies/actions?type=generate"
+            val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
+            navController.navigate(Screen.Analytics.route.replace("{href}", encodedUrl))
         }) {
             Text("Ouvrir")
         }
