@@ -20,7 +20,7 @@ import ca.qc.cstj.navigationdemo.ui.screens.profile.ProfileScreen
 @Composable
 fun HomeScreen(navController : NavHostController = rememberNavController()) {
 
-    Scaffold(
+    /*Scaffold(
         bottomBar = { BottomNavigationBar(navController) }
     ) { innerPadding ->
         NavHost(
@@ -32,5 +32,5 @@ fun HomeScreen(navController : NavHostController = rememberNavController()) {
                 composable(Screen.List.title, content =  { ListScreen() })
                 composable(Screen.Analytics.title, content =  { AnalyticsScreen() })
             })
-    }
+    }*/
 }
