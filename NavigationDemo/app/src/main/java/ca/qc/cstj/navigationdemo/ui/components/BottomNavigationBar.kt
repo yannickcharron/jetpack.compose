@@ -20,7 +20,7 @@ fun BottomNavigationBar(navController: NavController) {
         //BottomNavItem.Home,
         BottomNavItem.Profile,
         BottomNavItem.List,
-        BottomNavItem.Analytics
+        BottomNavItem.Camera
     )
 
     NavigationBar {
@@ -47,5 +47,7 @@ sealed class BottomNavItem(var title: String, var icon: Int) {
     //object Home: BottomNavItem("Home", R.drawable.baseline_home_24)
     object List: BottomNavItem("List", R.drawable.baseline_list_24)
     object Analytics: BottomNavItem("Analytics", R.drawable.baseline_analytics_24)
+
+    object Camera: BottomNavItem("Camera", R.drawable.baseline_camera_enhance_24)
 
 }
