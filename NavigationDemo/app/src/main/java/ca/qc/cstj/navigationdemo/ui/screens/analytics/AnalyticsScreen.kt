@@ -12,14 +12,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.CreationExtras
 import ca.qc.cstj.navigationdemo.ui.components.BottomNavItem
 
 @Composable
-fun AnalyticsScreen(href: String, viewModel: AnalyticsViewModel = viewModel() ) {
+fun AnalyticsScreen(href: String,
+                    viewModel: AnalyticsViewModel = viewModel(factory = AnalyticsViewModel.Factory(href) ) ) {
+
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val counter by remember { mutableIntStateOf(0) }
+
     Log.d("AnalyticsScreen", counter.toString())
     Column(modifier = Modifier.padding(8.dp)) {
         Text(BottomNavItem.Analytics.title)
-        Text(href)
+        Text(uiState.value)
     }
 }
