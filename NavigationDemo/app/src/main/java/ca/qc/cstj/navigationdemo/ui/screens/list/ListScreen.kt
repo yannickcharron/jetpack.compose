@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.qc.cstj.navigationdemo.ui.components.BottomNavItem
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -27,7 +28,7 @@ fun ListScreen(viewModel: ListViewModel = viewModel()) {
     val counter by remember { mutableStateOf(0) }
 
     //https://stackoverflow.com/questions/76808167/this-function-is-called-multiple-times-in-jetpack-compose
-    val state = viewModel.uiState.collectAsState()
+    val state = viewModel.uiState.collectAsStateWithLifecycle()
 
     Log.d("ListScreen", counter.toString())
     Column(modifier = Modifier

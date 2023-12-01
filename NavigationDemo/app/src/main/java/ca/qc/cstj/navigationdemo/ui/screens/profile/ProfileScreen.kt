@@ -18,7 +18,7 @@ fun ProfileScreen(navController: NavHostController) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text(BottomNavItem.Profile.title)
         Button(onClick = {
-            val url = "https://api.andromia.science/allies/actions?type=generate"
+            val url = "https://google.ca"
             val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
             navController.navigate(Screen.Analytics.route.replace("{href}", encodedUrl))
         }) {
