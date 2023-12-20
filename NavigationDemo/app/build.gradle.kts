@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization") version("1.8.20")
 }
 
 android {
@@ -50,7 +51,7 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.7.5"
+    val nav_version = "2.5.3"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -61,7 +62,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -72,6 +73,13 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+
+    //Bibliothèque Fuel pour les requêtes HTTP
+    implementation ("com.github.kittinunf.fuel:fuel-android:2.3.1")
+    implementation ("com.github.kittinunf.fuel:fuel-json:2.3.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
+
 
     implementation("io.github.g00fy2.quickie:quickie-bundled:1.8.0")
 

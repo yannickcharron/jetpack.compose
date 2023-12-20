@@ -14,7 +14,7 @@ import ca.qc.cstj.navigationdemo.Screen
 fun LoginScreen(navController: NavHostController) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text(Screen.Login.title)
-        Button(onClick = { navController.navigate(Screen.Home.route) }) {
+        Button(onClick = { navController.navigate(Screen.Profile.route) }) {
             Text("Login")
         }
     }

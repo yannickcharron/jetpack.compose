@@ -9,18 +9,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import ca.qc.cstj.navigationdemo.R
+import ca.qc.cstj.navigationdemo.Screen
 
 //https://bootcamp.uxdesign.cc/navigation-bar-with-jetpack-compose-32b052824b7d
 
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         //BottomNavItem.Home,
-        BottomNavItem.Profile,
-        BottomNavItem.List,
-        BottomNavItem.Camera
+        Screen.Profile,
+        Screen.Analytics,
+        Screen.List
     )
 
     NavigationBar {
@@ -32,12 +34,13 @@ fun BottomNavigationBar(navController: NavController) {
 }
 
 @Composable
-fun RowScope.AddItem(screen: BottomNavItem, navController: NavController) {
+fun RowScope.AddItem(screen: Screen, navController: NavHostController) {
     NavigationBarItem(
         label = { Text(text = screen.title)},
         selected = true,
-        onClick = { navController.navigate(screen.title) },
-        icon = { Icon(painter = painterResource(id = screen.icon), contentDescription = screen.title) },
+        onClick = { navController.navigate(screen.route)},
+        icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
+        /*icon = { Icon(painter = painterResource(id = screen.icon), contentDescription = screen.title) },*/
         colors = NavigationBarItemDefaults.colors()
     )
 }
