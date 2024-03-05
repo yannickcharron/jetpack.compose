@@ -101,6 +101,10 @@ fun BottomMenu(
     var selectedItemIndex by remember {
         mutableStateOf(initialSelectedItemIndex)
     }
+
+    var test1 = remember {
+        mutableStateOf(initialSelectedItemIndex)
+    }
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
@@ -117,7 +121,7 @@ fun BottomMenu(
                 activeTextColor = activeTextColor,
                 inactiveTextColor = inactiveTextColor
             ) {
-                selectedItemIndex = index
+                test1 = index
             }
         }
     }
